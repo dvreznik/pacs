@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CB8AFC49-9755-4FB2-A85E-1E5E821D04D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91AAD082-A0A6-4C53-B4C1-E58F29388ACC}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PACS", "src\PACS\PACS.xproj", "{75D77649-F185-414A-9A04-4AB4585A842D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75D77649-F185-414A-9A04-4AB4585A842D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D77649-F185-414A-9A04-4AB4585A842D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D77649-F185-414A-9A04-4AB4585A842D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D77649-F185-414A-9A04-4AB4585A842D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{75D77649-F185-414A-9A04-4AB4585A842D} = {CB8AFC49-9755-4FB2-A85E-1E5E821D04D4}
+	EndGlobalSection
+EndGlobal

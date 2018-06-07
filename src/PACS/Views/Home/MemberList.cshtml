@@ -1,0 +1,18 @@
+﻿@model IEnumerable<GymMember>
+
+@{Layout = "_Layout";}
+
+<div class="bg-primary panel-body"><h2>Members</h2></div>
+
+@foreach (GymMember member in Model)
+{
+    <div>
+        <img src="@member.RelImage" width="160px" height="160px" style="float:left;margin: 7px 7px 7px 0;"/>
+        <h4>Owner id: @member.GymMemberId</h4>
+        <h4> Name: @member.FirstName @member.LastName </h4>
+        <h4>Date of birthday: @member.BirthDate.ToString("dd/MM/yyyy")</h4>
+        <h4>Email: @member.Email</h4>
+        <h4>Phone: @member.PhoneNumber</h4>
+        <h4>Staff: @(member.Staff ? "No" : "Yes")</h4>
+    </div>
+}
