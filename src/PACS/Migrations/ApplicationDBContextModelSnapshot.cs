@@ -13,7 +13,7 @@ namespace PACS.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("PACS.Models.GymCard", b =>
@@ -27,13 +27,15 @@ namespace PACS.Migrations
 
                     b.Property<int>("GymMemberId");
 
-                    b.Property<int>("Kind");
+                    b.Property<string>("Kind");
 
-                    b.Property<bool>("Tainer");
+                    b.Property<bool>("Trainer");
 
                     b.Property<bool>("Visible");
 
                     b.HasKey("GymCardId");
+
+                    b.HasIndex("GymMemberId");
 
                     b.ToTable("GymCards");
                 });
@@ -66,6 +68,14 @@ namespace PACS.Migrations
                     b.HasKey("GymMemberId");
 
                     b.ToTable("GymMembers");
+                });
+
+            modelBuilder.Entity("PACS.Models.GymCard", b =>
+                {
+                    b.HasOne("PACS.Models.GymMember", "GymMember")
+                        .WithMany()
+                        .HasForeignKey("GymMemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

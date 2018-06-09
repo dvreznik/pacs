@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace PACS.Models
     public class GymMember
     {
         //auto increment filed for count
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GymMemberId { get; set; }
         // first name
         [Required(ErrorMessage = "Please enter your name")]

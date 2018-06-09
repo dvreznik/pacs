@@ -28,6 +28,8 @@ namespace PACS
             services.AddTransient<IGymMemberRepo, EFMemberRepository>();
             services.AddTransient<IGymCardRepo, EFCardsRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,13 +38,17 @@ namespace PACS
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name:"default",
-                    template:"{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: null, template: "{kind}/Page{page:int}", defaults: new { controller = "Home", action = "Index"});
+                routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Home", action = "Index", page = 1 });
+                routes.MapRoute(name: null, template: "kind", defaults: new { controller = "Home", action = "Index", page = 1 });
+                routes.MapRoute(name:null,template:"",defaults:new { controller = "Home", action = "Index", page = 1});
+                routes.MapRoute(name:null,template:"{controller}/{action}/{id?}");
+                
             });
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PACS.Models;
 using PACS.Models.ViewModels;
 
@@ -23,26 +24,37 @@ namespace PACS.Controllers
         {
             _cardRepo = cardRepo;
             _memberRepo = memberRepo;
-        }
+        }        
 
-        // GET: /<controller>/
-        
-        public ViewResult Index(int page = 1)
-            => View(new CardListViewModel
-            {
-                GymCards = _cardRepo.GymCards
-                .OrderBy(p => p.GymCardId)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
-                GymMembers = _memberRepo.GymMembers,
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemPerPage = PageSize,
-                    TotalItems = _cardRepo.GymCards.Count()
-                }
-            }
-            );        
+        public ViewResult Index(string kind, int page = 1)
+           => View(new CardListViewModel
+           {
+               GymCards = _cardRepo.GymCards
+               .Where(p => kind == null || p.Kind == kind)
+               .Include(x => x.GymMember)
+               .Select(x => new GymCardViewModel
+               {     
+                   OwnerId = x.GymMember.GymMemberId,              
+                   Img = x.GymMember.RelImage,
+                   Trainer = x.Trainer,
+                   DateOrder = x.DateOrder,
+                   Kind = x.Kind,
+                   OwnerName = x.GymMember.FirstName
+               })
+               .OrderBy(p => p.OwnerId)
+               .Skip((page - 1) * PageSize)
+               .Take(PageSize),               
+               PagingInfo = new PagingInfo
+               {
+                   CurrentPage = page,
+                   ItemPerPage = PageSize,
+                    TotalItems = kind == null ?
+                   _cardRepo.GymCards.Count() :
+                   _cardRepo.GymCards.Where(e => e.Kind == kind).Count()
+               },
+               CurrentKind = kind
+           }
+           );
 
         public ViewResult MemberList() => View(_memberRepo.GymMembers);
     }

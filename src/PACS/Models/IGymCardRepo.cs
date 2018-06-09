@@ -7,6 +7,6 @@ namespace PACS.Models
 {
     public interface IGymCardRepo
     {
-        IEnumerable<GymCard> GymCards { get; }
+        IQueryable<GymCard> GymCards { get; }
     }
 }

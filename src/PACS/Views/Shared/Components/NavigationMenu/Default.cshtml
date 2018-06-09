@@ -1,0 +1,16 @@
+﻿@model NavigationMenuViewModel
+<h3>Navigation menu by kinds</h3>
+<a class="btn btn-block btn-default"
+   asp-action="Index"
+   asp-controller="Home"
+   asp-route-kind="">Home</a>
+@foreach (string kind in Model.Kinds)
+{
+    <a class="btn btn-block 
+       @(kind.Equals(Model.SelectedKind) ? "btn-primary" : "btn-default")"
+       asp-action="Index"
+       asp-controller="Home"
+       asp-route-kind="@kind"
+       asp-route-page="1">@kind</a>
+
+}

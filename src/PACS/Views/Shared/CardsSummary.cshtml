@@ -1,0 +1,18 @@
+﻿@model CardListViewModel
+
+@foreach (var p in Model.GymCards)
+{
+    <div class="col-sm-12 cardList"  style="margin-top:15px;">
+        <img src="@p.Img" />
+        <h5> Trainer: @(p.Trainer ? "Yes" : "No") </h5>
+        <h5>Date order subscription: @p.DateOrder.ToString("dd/MM/yyyy")</h5>
+        <h5>Kind: @p.Kind </h5>
+        <h5>Owner name: @p.OwnerName</h5>       
+            <form id="@p.OwnerId" asp-action="AddToGymIn" asp-controller="GymIn" method="post">
+                <input type="hidden" asp-for=@p.OwnerId />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit" class="btn btn-success btn-sm pull-right">Come in</button>
+            </form>
+       
+    </div>
+}

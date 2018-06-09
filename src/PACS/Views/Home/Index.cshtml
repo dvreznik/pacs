@@ -2,20 +2,19 @@
 
 @{Layout = "_Layout";}
 
-<div class="bg-primary panel-body"><h2>Cards</h2></div>
+<div class="bg-primary panel-body" style="border-radius:10px"><h2>Cards</h2></div>
 
-@foreach (var p in Model.GymCards)
-{
-    <div> 
-              
-        <h3> Trainer: @(p.Tainer ? "Yes" : "No") </h3>
-        <h4>Date order subscription: @p.DateOrder.ToString("dd/MM/yyyy")</h4>
-        <h4>Kind: @p.Kind</h4>
-        <h4>Owner id: @p.GymMemberId</h4>        
-    </div>    
-}
+@Html.Partial("CardsSummary",Model)
 
-<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+<div page-model="@Model.PagingInfo" page-action="Index"
+     page-classes-enabled ="true"
+     page-class="btn"
+     page-class-normal="btn-default"
+     page-class-selected="btn-primary"
+     page-url-kind="@Model.CurrentKind"
+     class="btn-group pull-right">
+</div>
+@*<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
     <div class="form-group">
         <div class="col-md-10">
             <p>Upload one file using this form:</p>
@@ -27,4 +26,4 @@
             <input type="submit" value="Upload" />
         </div>
     </div>
-</form>
+</form>*@

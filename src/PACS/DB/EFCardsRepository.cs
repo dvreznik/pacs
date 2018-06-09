@@ -14,6 +14,6 @@ namespace PACS.DB
         {
             _context = ctx;
         }
-        public IEnumerable<GymCard> GymCards => _context.GymCards;
+        public IQueryable<GymCard> GymCards => _context.GymCards;
     }
 }

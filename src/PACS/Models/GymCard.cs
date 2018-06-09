@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PACS.Models
 {
@@ -9,18 +10,21 @@ namespace PACS.Models
         /// GymCard class contain all information about type of card and it's owner
         /// </summary>
         // auto increment filed for count
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GymCardId { get; set; }
         // if trainer support
-        public bool Tainer { get; set; }        
+        public bool Trainer { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime ExpirationDate { get; set; }
-        // 
-        public Kind Kind { get; set; }
-        // owner of card
+        // get data from enum Kind
+        public string Kind { get; set; }
+        // owner of card       
         public int GymMemberId { get; set; }
+        [ForeignKey("GymMemberId")]
+        public virtual GymMember GymMember { get; set; }
         // if card is available
         public bool Visible { get; set; }
-       
+
     }
 
     public enum Kind
@@ -43,5 +47,5 @@ namespace PACS.Models
         Month_6,
         [Display(Name = "Year")]
         Year
-    }       
+    }
 }
